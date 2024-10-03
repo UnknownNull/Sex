@@ -6,6 +6,7 @@ namespace UnknownNull\SexMod;
 
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\NetworkBroadcastUtils;
+use pocketmine\network\mcpe\protocol\AnimateEntityPacket;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\scheduler\CancelTaskException;
@@ -66,21 +67,21 @@ class SexingTask extends Task {
 			$this->player->sendMessage(TextFormat::GREEN . "Successfully finished sex!");
 			$this->sexingPlayer->sendMessage(TextFormat::GREEN . "Successfully finished sex!");
 
-			// Main::getInstance()->unsetLay($this->sexingPlayer);
+			 Main::getInstance()->unsetLay($this->sexingPlayer);
 
-			// $packet = AnimateEntityPacket::create(
-			// 	animation: "animation.player.bob",
-			// 	nextState: "",
-			// 	stopExpression: "",
-			// 	stopExpressionVersion: 0,
-			// 	controller: "",
-			// 	blendOutTime: 0.0,
-			// 	actorRuntimeIds: [$this->player->getId()]
-			// );
-			// NetworkBroadcastUtils::broadcastPackets($this->player->getServer()->getOnlinePlayers(), [$packet]);
+			 $packet = AnimateEntityPacket::create(
+			 	animation: "animation.player.bob",
+			 	nextState: "",
+			 	stopExpression: "",
+			 	stopExpressionVersion: 0,
+			 	controller: "",
+			 	blendOutTime: 0.0,
+			 	actorRuntimeIds: [$this->player->getId()]
+			 );
+			 NetworkBroadcastUtils::broadcastPackets($this->player->getServer()->getOnlinePlayers(), [$packet]);
 
-			// $this->sexingPlayer->teleport($this->player->getWorld()->getSafeSpawn());
-			// $this->player->teleport($this->player->getWorld()->getSafeSpawn());
+			 $this->sexingPlayer->teleport($this->player->getWorld()->getSafeSpawn());
+			 $this->player->teleport($this->player->getWorld()->getSafeSpawn());
 
 			$this->player->setNoClientPredictions(false);
 
